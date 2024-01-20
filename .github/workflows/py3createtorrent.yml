@@ -42,7 +42,7 @@ jobs:
         run: pipx install py3createtorrent
         
       - name: Download file
-        run: aria2c -x 16 -o "${{ github.event.inputs.file_name }}" "${{ github.event.inputs.url }}"
+        run: aria2c --check-certificate=false -x 16 -o "${{ github.event.inputs.file_name }}" "${{ github.event.inputs.url }}"
         
       - name: Create torrent using py3createtorrent
         run: py3createtorrent -p "${{ github.event.inputs.piece_size }}" -c "${{ github.event.inputs.comment }}" -s "torrent-webseed-creator" -o "${{ github.event.inputs.name }}.torrent" --webseed "${{ github.event.inputs.url }}" "${{ github.event.inputs.file_name }}"
